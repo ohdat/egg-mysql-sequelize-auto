@@ -1,6 +1,6 @@
 {
-  "name": "egg-mysql-sequelize-auto",
-  "version": "1.1.6",
+  "name": "egg-sequelize-auto",
+  "version": "1.1.7",
   "description": "Automatically generate mysql sequelize models for Egg.js framework from your database.",
   "main": "index.js",
   "types": "types",
@@ -38,6 +38,9 @@
     "stubs/*.stub",
     "*.md"
   ],
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ohdat/egg-sequelize-auto.git"
