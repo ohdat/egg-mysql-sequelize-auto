@@ -1,5 +1,5 @@
 {
-  "name": "egg-sequelize-auto",
+  "name": "@ohdat/egg-sequelize-auto",
   "version": "1.1.7",
   "description": "Automatically generate mysql sequelize models for Egg.js framework from your database.",
   "main": "index.js",
