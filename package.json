@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Automatically generate mysql sequelize models for Egg.js framework from your database.",
   "main": "index.js",
+  "types": "types",
   "dependencies": {
     "fs-extra": "^9.0.1",
     "mysql": "^2.18.1",
