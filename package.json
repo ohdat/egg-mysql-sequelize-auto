@@ -1,5 +1,5 @@
 {
-  "name": "@ohdat/egg-sequelize-auto",
+  "name": "egg-sequelize-auto",
   "version": "1.1.8",
   "description": "Automatically generate mysql sequelize models for Egg.js framework from your database.",
   "main": "index.js",
@@ -39,7 +39,7 @@
     "*.md"
   ],
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry":"https://npm.pkg.github.com/ohdat"
   },
   "repository": {
     "type": "git",
