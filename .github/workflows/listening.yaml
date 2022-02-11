@@ -19,7 +19,7 @@ jobs:
       - name: getlocalrelese
         run: |
           catrelease=`cat ./package.json | grep version | awk -F '"' '{print $4}'`
-          echo '::set-output name=release::$catrelease'
+          echo '::set-output name=release::`cat ./package.json | grep version | awk -F '"' '{print $4}'`'
         id: localrelease
       - name: echoenv
         run: |
