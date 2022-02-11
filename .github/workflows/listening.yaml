@@ -24,7 +24,7 @@ jobs:
       - name:
           run: |
             echo ${{ env.remoterelease }}
-            echo ${{ env.remoterelease }}
+            echo ${{ env.localrelease }}
       - name: check release
         if: ${{ env.remoterelease }} == ${{ env.localrelease }}
         uses: andymckay/cancel-action@0.2
