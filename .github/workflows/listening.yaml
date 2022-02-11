@@ -21,14 +21,14 @@ jobs:
           localrelease=`cat ./package.json | grep version | awk -F '"' '{print $4}'`
         env:
           localrelease: $localrelease
-      - name:
+      - name: echo env
         run: |
-            echo $localrelease
+            echo ${{ localrelease }}
             echo ${{ steps.getremoterelease.outputs.release }}
             echo ${{ env.remoterelease }}
             echo ${{ env.localrelease }}
       - name: check release
-        if: ${{ env.remoterelease }} == ${{ env.localrelease }}
+        if: ${{ localrelease }} == ${{ steps.getremoterelease.outputs.release }}
         uses: andymckay/cancel-action@0.2
       - name: Release
         uses: softprops/action-gh-release@v1
