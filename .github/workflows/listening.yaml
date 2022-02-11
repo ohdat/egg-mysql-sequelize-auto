@@ -22,7 +22,7 @@ jobs:
         env:
           localrelease: $localrelease
       - name: check release
-        if ${{ env.remoterelease }} == ${{ env.localrelease }}
+        if: ${{ env.remoterelease }} == ${{ env.localrelease }}
         uses: andymckay/cancel-action@0.2
       - name: Release
         uses: softprops/action-gh-release@v1
