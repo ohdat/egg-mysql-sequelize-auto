@@ -23,6 +23,8 @@ jobs:
           localrelease: $localrelease
       - name:
         run: |
+            echo $localrelease
+            echo ${{ steps.getremoterelease.outputs.release }}
             echo ${{ env.remoterelease }}
             echo ${{ env.localrelease }}
       - name: check release
