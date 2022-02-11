@@ -23,10 +23,10 @@ jobs:
         id: localrelease
       - name: echoenv
         run: |
-            echo ${{ step.localrelease.outputs.release }}
+            echo ${{ steps.localrelease.outputs.release }}
             echo ${{ steps.getremoterelease.outputs.release }}
       - name: check release
-        if: ${{ step.localrelease.outputs.release }} == ${{ steps.getremoterelease.outputs.release }}
+        if: ${{ steps.localrelease.outputs.release }} == ${{ steps.getremoterelease.outputs.release }}
         uses: andymckay/cancel-action@0.2
       - name: Release
         uses: softprops/action-gh-release@v1
