@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'package.json'
 
 jobs:
   build:
@@ -30,6 +32,5 @@ jobs:
         uses: andymckay/cancel-action@0.2
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           name: ${{ env.localrelease }}
