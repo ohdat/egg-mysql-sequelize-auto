@@ -22,7 +22,7 @@ jobs:
         env:
           localrelease: $localrelease
       - name:
-          run: |
+        run: |
             echo ${{ env.remoterelease }}
             echo ${{ env.localrelease }}
       - name: check release
