@@ -19,14 +19,14 @@ jobs:
       - name: getlocalrelese
         run: |
           catrelease=`cat ./package.json | grep version | awk -F '"' '{print $4}'`
-          echo "localrelease=$catrelease" >> $GITHUB_ENV
+          echo "localrelease=v$catrelease" >> $GITHUB_ENV
         id: localrelease
       - name: echoenv ${{ env.localrelease }} -${{ env.remoterelease }}  - ${{ steps.getremoterelease.outputs.release }}
         run: |
             echo ${{ env.localrelease }}
             echo ${{ steps.getremoterelease.outputs.release }}
       - name: check release
-        if: ${{ env.localrelease }} == ${{ steps.getremoterelease.outputs.release }}
+        if: env.localrelease  == steps.getremoterelease.outputs.release 
         uses: andymckay/cancel-action@0.2
       - name: Release
         uses: softprops/action-gh-release@v1
