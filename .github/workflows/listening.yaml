@@ -1,0 +1,31 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - id: getremoterelease
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          repository: ${{ github.repository }}
+        env:
+          remoterelease: ${{ steps.getremoterelease.outputs.release }}
+      - name: getlocalrelese
+        run: |
+          localrelease=`cat ./package.json | grep version | awk -F '"' '{print $4}'`
+        env:
+          localrelease: $localrelease
+      - name: check release
+        if ${{ env.remoterelease }} == ${{ env.localrelease }}
+        uses: andymckay/cancel-action@0.2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: v${{ env.localrelease }}
