@@ -1,16 +1,15 @@
-# egg-mysql-sequelize-auto
+# egg-sequelize-auto
 用命令行自动生成Egg.js框架SequelizeJS的model类 (只支持typescript)
 
-Read this in other languages: [English](https://github.com/jerryhu/egg-mysql-sequelize-auto/blob/main/README.en.md)
 
 ## 安装
 ```
-npm install egg-mysql-sequelize-auto --save-dev
+npm install @ohdat/egg-sequelize-auto --save-dev
 ```
 
 ## 命令行说明
 ```
-mysql-sequelize-auto -h <host> -d <database> -p [port] -u <user> -x [password] -o [./path/to/model] -t [tableName]
+egg-sequelize-auto -h <host> -d <database> -p [port] -u <user> -x [password] -o [./path/to/model] -t [tableName]
 
 Options:
   -h, --host        IP/Hostname for the database.                       [string]
@@ -28,7 +27,7 @@ Options:
 
 ```json
 "scripts": {
-  "model": "mysql-sequelize-auto -h 127.0.0.1 -d database_name -p 3306 -u user -x password -o './app/model' -t table_name"
+  "model": "egg-sequelize-auto -h 127.0.0.1 -d database_name -p 3306 -u user -x password -o './app/model' -t table_name"
 }
 ```
 #### 命令行
@@ -40,7 +39,7 @@ npm run model
 ### package.json [选项 2]
 ```json
 "scripts": {
-  "model": "mysql-sequelize-auto -h 127.0.0.1 -d database_name -p 3306 -u user -x password -o './app/model'"
+  "model": "egg-sequelize-auto -h 127.0.0.1 -d database_name -p 3306 -u user -x password -o './app/model'"
 }
 ```
 #### 命令行
@@ -153,5 +152,20 @@ class TestTable extends Model<TestTableAttributes, any> implements TestTableAttr
 export { TestTableAttributes, TestTable };
 ```
 ---
-## 链接
-[Sequelize-Auto](https://github.com/sequelize/sequelize-auto) (从Sequelize-Auto借用了一些代码)
+
+#### 私有库配置  
+添加 .npmrc 文件内写入
+```
+	@ohdat:registry=https://npm.pkg.github.com/
+```
+使用npm login命令进行授权，注意用户名要全部小写，Token的输入是以密码的方式输入，不会显示。
+```
+npm login --registry=https://npm.pkg.github.com
+> Username: USERNAME
+> Password: TOKEN
+> Email: PUBLIC-EMAIL-ADDRESS`
+```
+或者 在actions 中使用
+```
+npm config set @ohdat:registry https://npm.pkg.github.com/:_authToken=TOKEN
+```
