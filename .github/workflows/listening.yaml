@@ -19,11 +19,11 @@ jobs:
       - name: getlocalrelese
         run: |
           catrelease=`cat ./package.json | grep version | awk -F '"' '{print $4}'`
-          echo '::set-output name=release::`cat ./package.json | grep version | awk -F '"' '{print $4}'`'
+          echo "localrelease=$catrelease" >> $GITHUB_ENV
         id: localrelease
-      - name: echoenv
+      - name: echoenv ${{ env.localrelease }}
         run: |
-            echo ${{ steps.localrelease.outputs.release }}
+            echo ${{ env.localrelease }}
             echo ${{ steps.getremoterelease.outputs.release }}
       - name: check release
         if: ${{ steps.localrelease.outputs.release }} == ${{ steps.getremoterelease.outputs.release }}
