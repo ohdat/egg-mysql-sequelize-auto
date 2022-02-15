@@ -38,10 +38,12 @@ export class AutoBuilder {
     const content: ModelContent = {};
     for (i; i < this.tableColumns.length; i += 1) {
       content[this.tableColumns[i].Field] = {};
+      const column = this.tableColumns[i]
+
       if (this.tableColumns[i].Extra) {
         if (this.tableColumns[i].Extra === 'auto_increment') {
           content[this.tableColumns[i].Field].autoIncrement = true;
-        } else {
+        } else if(!~column.Field.indexOf('update')){
           content[this.tableColumns[i].Field][this.tableColumns[i].Extra] = true;
         }
       }
@@ -60,15 +62,19 @@ export class AutoBuilder {
       //   content[this.tableColumns[i].Field].type = 'LONGTEXT';
       // }
       content[this.tableColumns[i].Field].type = this.getSqType(this.tableColumns[i].Type);
-
-      if (this.tableColumns[i].Default) {
+      
+      const timeType  = ['created_at','updated_at','deleted_at'];
+      if (!~timeType.indexOf(column.Field) && this.tableColumns[i].Default) {
         content[this.tableColumns[i].Field].defaultValue = isNaN(Number(this.tableColumns[i].Default)) ? this.tableColumns[i].Default : Number(this.tableColumns[i].Default);
       }
+      
       const comment = this.comments.find(o => o.name === this.tableColumns[i].Field);
       if(comment){
         content[this.tableColumns[i].Field].comment = comment.comment;
       }
     }
+    
+
     const json = JSON.stringify(content, null, '\t');
 
     const parse_content = json.replace(/\"([^\")"]+)\":/g, '$1:').replace(/"(DataTypes.*)"/g, '$1');
