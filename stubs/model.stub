@@ -7,7 +7,7 @@ export default function(app: Application) {
   const ExportModel = app.model.define<${classname}, any>('${classname}', 
     ${attribute}
   , {
-    timestamps: false, // 去除createAt updateAt
+    timestamps: true, // 使用 createAt updateAt
     freezeTableName: true, // 使用自定义表名
     paranoid: true, // 软删除
     tableName: '${tablename}',
