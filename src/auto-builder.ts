@@ -39,7 +39,10 @@ export class AutoBuilder {
     for (i; i < this.tableColumns.length; i += 1) {
       content[this.tableColumns[i].Field] = {};
       const column = this.tableColumns[i]
-
+      const timeType  = ['created_at','updated_at','deleted_at'];
+      if(!!~timeType.indexOf(column.Field)){
+        continue;
+      }
       if (this.tableColumns[i].Extra) {
         if (this.tableColumns[i].Extra === 'auto_increment') {
           content[this.tableColumns[i].Field].autoIncrement = true;
@@ -63,8 +66,8 @@ export class AutoBuilder {
       // }
       content[this.tableColumns[i].Field].type = this.getSqType(this.tableColumns[i].Type);
       
-      const timeType  = ['created_at','updated_at','deleted_at'];
-      if (!~timeType.indexOf(column.Field) && this.tableColumns[i].Default) {
+     
+      if (this.tableColumns[i].Default) {
         content[this.tableColumns[i].Field].defaultValue = isNaN(Number(this.tableColumns[i].Default)) ? this.tableColumns[i].Default : Number(this.tableColumns[i].Default);
       }
       
