@@ -37,12 +37,12 @@ export class AutoBuilder {
     let i = 0;
     const content: ModelContent = {};
     for (i; i < this.tableColumns.length; i += 1) {
-      content[this.tableColumns[i].Field] = {};
       const column = this.tableColumns[i]
       const timeType  = ['created_at','updated_at','deleted_at'];
       if(!!~timeType.indexOf(column.Field)){
         continue;
       }
+      content[this.tableColumns[i].Field] = {};
       if (this.tableColumns[i].Extra) {
         if (this.tableColumns[i].Extra === 'auto_increment') {
           content[this.tableColumns[i].Field].autoIncrement = true;
