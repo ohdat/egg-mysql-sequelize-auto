@@ -38,11 +38,15 @@ export class AutoBuilder {
     const content: ModelContent = {};
     for (i; i < this.tableColumns.length; i += 1) {
       const column = this.tableColumns[i]
-      const timeType  = ['created_at','updated_at','deleted_at'];
-      if(!!~timeType.indexOf(column.Field)){
+      if( column.Field == 'deleted_at'){
         continue;
       }
       content[this.tableColumns[i].Field] = {};
+      // const timeType  = ['created_at','updated_at','deleted_at'];
+      // if(!~timeType.indexOf(column.Field)){
+
+      // }
+
       if (this.tableColumns[i].Extra) {
         if (this.tableColumns[i].Extra === 'auto_increment') {
           content[this.tableColumns[i].Field].autoIncrement = true;
