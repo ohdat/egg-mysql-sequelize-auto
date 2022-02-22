@@ -69,9 +69,8 @@ export class AutoBuilder {
       //   content[this.tableColumns[i].Field].type = 'LONGTEXT';
       // }
       content[this.tableColumns[i].Field].type = this.getSqType(this.tableColumns[i].Type);
-      
      
-      if (this.tableColumns[i].Default) {
+      if (this.tableColumns[i].Default && !~['created_at','updated_at'].indexOf(column.Field)) {
         content[this.tableColumns[i].Field].defaultValue = isNaN(Number(this.tableColumns[i].Default)) ? this.tableColumns[i].Default : Number(this.tableColumns[i].Default);
       }
       
